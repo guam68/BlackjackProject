@@ -15,8 +15,9 @@ public class BlackjackTable {
 	public void run() {
 		dealer.getDeck().shuffle();
 		dealer.dealInitial(user, dealer, 2);
-		boolean blackjack = isBlackjack(dealer, user);
+		boolean blackjack = hasBlackjack(dealer, user);
 
+		System.out.println(blackjack);
 		if (!blackjack) {
 			System.out.println(user);
 			System.out.println("Total: " + user.getHand().getHandValue() + "\n");
@@ -51,6 +52,7 @@ public class BlackjackTable {
 				}
 			}
 		}
+		System.out.println("Blackjack!");
 		kb.close();
 	}
 
@@ -85,16 +87,16 @@ public class BlackjackTable {
 		return bust;
 	}
 
-	private boolean isBlackjack(BlackJackPlayer dealer, BlackJackPlayer p1) {
+	private boolean hasBlackjack(BlackJackPlayer dealer, BlackJackPlayer p1) {
 		if (dealer.getHand().isBlackjack() && p1.getHand().isBlackjack()) {
 			System.out.println(dealer);
 			System.out.println(p1);
 			return true;
-		} else if (dealer.getHand().isBlackjack() && !p1.getHand().isBlackjack()) {
+		} else if (dealer.getHand().isBlackjack()) {
 			System.out.println(dealer);
 			System.out.println(p1);
 			return true;
-		} else if (dealer.getHand().isBlackjack() && p1.getHand().isBlackjack()) {
+		} else if (p1.getHand().isBlackjack()) {
 			System.out.println(dealer);
 			System.out.println(p1);
 			return true;
