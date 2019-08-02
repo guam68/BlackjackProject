@@ -1,7 +1,8 @@
 package com.skilldistillery.cards.blackjack;
 
+import java.util.List;
+
 import com.skilldistillery.cards.common.Card;
-import com.skilldistillery.cards.common.Deck;
 import com.skilldistillery.cards.common.Hand;
 
 public class BlackJackHand extends Hand{
@@ -12,20 +13,6 @@ public class BlackJackHand extends Hand{
 		super();
 	}
 	
-	public void hit(Deck deck) {
-		if (deck.checkDeckSize() > 0) {
-			hand.add(deck.dealCard());
-		}
-	}
-	
-	public void showHand() {
-		System.out.println("----------------------");
-		for (Card card : hand) {
-			System.out.println(card);
-		}
-		System.out.println("----------------------");
-	}
-	
 	public int getHandValue() {
 		int value = 0;
 		for (Card card : hand) {
@@ -34,8 +21,16 @@ public class BlackJackHand extends Hand{
 		return value;
 	}
 	
-	public boolean checkBusted() {
+	public boolean isBusted() {
 		return getHandValue() > BLACKJACK ? true : false;
+	}
+	
+	public boolean isBlackjack() {
+		return getHandValue() == BLACKJACK ? true : false;
+	}
+	
+	public List<Card> getHand() {
+		return this.hand;
 	}
 
 }

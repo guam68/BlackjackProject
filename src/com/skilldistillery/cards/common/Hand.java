@@ -14,22 +14,9 @@ public abstract class Hand {
 		hand = new ArrayList<>();
 	}
 
-	public void hit(Deck deck) {
-		if (deck.checkDeckSize() > 0) {
-			hand.add(deck.dealCard());
-		}
+	public List<Card> getCards(){
+		return hand;
 	}
 
 	public abstract int getHandValue();
-
-	@Override
-	public String toString() {
-		System.out.println("----------------------");
-		for (Card card : hand) {
-			System.out.println(card);
-		}
-		System.out.println("----------------------");
-		return null;
-	}
-	
 }
