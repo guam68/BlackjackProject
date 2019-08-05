@@ -17,7 +17,6 @@ public class BlackjackTable {
 		dealer.dealInitial(user, dealer, 2);
 		boolean blackjack = hasBlackjack(dealer, user);
 
-		System.out.println(blackjack);
 		if (!blackjack) {
 			System.out.println(user);
 			System.out.println("Total: " + user.getHand().getHandValue() + "\n");
@@ -41,7 +40,6 @@ public class BlackjackTable {
 				}
 			}
 			System.out.println("\n");
-
 			if (user.getHand().isBusted()) {
 				System.out.println("Busted...");
 			} else {
@@ -51,8 +49,9 @@ public class BlackjackTable {
 					System.out.println("You win!");
 				}
 			}
+		} else {
+			System.out.println("Blackjack!");
 		}
-		System.out.println("Blackjack!");
 		kb.close();
 	}
 
@@ -68,6 +67,9 @@ public class BlackjackTable {
 		if (user.getHand().getHandValue() > dealer.getHand().getHandValue()) {
 			System.out.println("You won!");
 			return true;
+		} else if (user.getHand().getHandValue() == dealer.getHand().getHandValue()) {
+			System.out.println("Push!");
+			return false;
 		} else {
 			System.out.println("Not this time...");
 			return false;
@@ -77,7 +79,7 @@ public class BlackjackTable {
 	private boolean getDealerCards() {
 		boolean bust = false;
 
-		while (bust || dealer.getHand().getHandValue() < 16) {
+		while (!bust && dealer.getHand().getHandValue() < 16) {
 			dealer.hit(dealer);
 			bust = dealer.getHand().isBusted();
 		}
@@ -89,16 +91,18 @@ public class BlackjackTable {
 
 	private boolean hasBlackjack(BlackJackPlayer dealer, BlackJackPlayer p1) {
 		if (dealer.getHand().isBlackjack() && p1.getHand().isBlackjack()) {
+			System.out.println("Your Hand:\n" + p1);
 			System.out.println(dealer);
-			System.out.println(p1);
+			System.out.println("Push!");
 			return true;
 		} else if (dealer.getHand().isBlackjack()) {
+			System.out.println("Your Hand:\n" + p1);
 			System.out.println(dealer);
-			System.out.println(p1);
+			System.out.println("Better luck next time...");
 			return true;
 		} else if (p1.getHand().isBlackjack()) {
+			System.out.println("Your Hand:\n" + p1);
 			System.out.println(dealer);
-			System.out.println(p1);
 			return true;
 		} else
 			return false;
